@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJAX POST Example with JSON</title>
+  <script>
+    function sendData() {
+      // รับค่าจากฟอร์ม
+      var studentID = document.getElementById("studentID").value;
+      var firstName = document.getElementById("firstName").value;
+      var lastName = document.getElementById("lastName").value;
+
+      // สร้างข้อมูลที่ต้องการส่ง
+      var data = `studentID=${studentID}&firstName=${firstName}&lastName=${lastName}`;
+
+      // สร้างวัตถุ XMLHttpRequest
+      var xhttp = new XMLHttpRequest();
+
+      // กำหนดฟังก์ชัน Callback ที่จะทำงานเมื่อได้รับการตอบกลับ
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          // แปลงข้อมูล JSON ที่ได้รับ
+          var response = JSON.parse(this.responseText);
+          // แสดงข้อมูล JSON ในหน้า HTML
+          document.getElementById("result").innerHTML = 
+            `รหัสนักศึกษา: ${response.studentID}<br>` +
+            `ชื่อ: ${response.firstName}<br>` +
+            `นามสกุล: ${response.lastName}`;
+        }
+      };
+
+      // เปิดวัตถุ XMLHttpRequest และระบุวิธีการ (POST) และ URL ที่ต้องการร้องขอ
+      xhttp.open("POST", "https://poohkanwebtech.w3spaces.com/index.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+      // ส่งคำขอไปยังเซิร์ฟเวอร์
+      xhttp.send(data);
+    }
+  </script>
+</head>
+<body>
+
+  <h1>AJAX POST Example with JSON</h1>
+  
+  <!-- ฟอร์มสำหรับกรอกข้อมูล -->
+  <form onsubmit="sendData(); return false;">
+    <label for="studentID">รหัสนักศึกษา:</label>
+    <input type="text" id="studentID" name="studentID" required>
+    <br>
+    <label for="firstName">ชื่อ:</label>
+    <input type="text" id="firstName" name="firstName" required>
+    <br>
+    <label for="lastName">นามสกุล:</label>
+    <input type="text" id="lastName" name="lastName" required>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <div id="result">ผลลัพธ์จะแสดงที่นี่</div>
+
+</body>
+</html>

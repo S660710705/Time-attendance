@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJAX Example with Multiple Callbacks</title>
+  <script>
+    function ajaxRequest(url, callback) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+        if (this.status == 200) {
+          callback(this.responseText);
+        }
+      };
+      xhttp.open("GET", url, true);
+      xhttp.send();
+    }
+
+    function handleUserDetails(response) {
+      document.getElementById("userDetails").innerHTML = response;
+    }
+
+    function handleProductList(response) {
+      document.getElementById("productList").innerHTML = response;
+    }
+  </script>
+</head>
+<body>
+
+  <h1>AJAX Example with Multiple Callbacks</h1>
+  <button type="button" onclick="ajaxRequest('user_details.txt', handleUserDetails)">Load User Details</button>
+  <button type="button" onclick="ajaxRequest('product_list.txt', handleProductList)">Load Product List</button>
+
+  <div id="userDetails">User details will be loaded here</div>
+  <div id="productList">Product list will be loaded here</div>
+
+</body>
+</html>

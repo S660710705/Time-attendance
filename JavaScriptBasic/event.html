@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Handlers Example</title>
+</head>
+<body>
+
+<a href="https://example.com" id="myLink">Go to Example.com</a>
+
+<script>
+    document.getElementById("myLink").onclick = function(event) {
+        // ป้องกันไม่ให้ event ถูกส่ง
+        event.preventDefault();
+        alert("Link click was prevented!");
+    };
+</script>
+
+</body>
+</html>

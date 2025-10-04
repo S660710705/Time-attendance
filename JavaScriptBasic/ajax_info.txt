@@ -1,0 +1,3 @@
+Hello! This is the content from the ajax_info.txt file.
+<br>
+สวัสดี นี่คือการอ่านข้อมูลผ่าน ajax_info.txt file

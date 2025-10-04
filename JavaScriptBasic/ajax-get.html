@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJAX Dictionary Example</title>
+  <script>
+    function getTranslation() {
+      // รับค่าจากฟอร์ม
+      var word = document.getElementById("word").value;
+
+      // สร้างข้อมูลที่ต้องการส่ง
+      var data = `word=${word}&lang=en`;
+
+      // สร้างวัตถุ XMLHttpRequest
+      var xhttp = new XMLHttpRequest();
+
+      // กำหนดฟังก์ชัน Callback ที่จะทำงานเมื่อได้รับการตอบกลับ
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+          if (this.status == 200) {
+            try {
+              // แปลงข้อมูล JSON ที่ได้รับ
+              var response = JSON.parse(this.responseText);
+              var output = "";
+
+              if (response.words && response.words.length > 0) {
+                response.words.forEach(function(item) {
+                  var sentry = decodeURIComponent(escape(item.sentry));
+                  output += `คำ: ${sentry} แปลว่า: ${item.tentry} (${item.scat})<br>`;
+                });
+              } else {
+                output = "ไม่พบคำแปล";
+              }
+            } catch (error) {
+              output = "เกิดข้อผิดพลาดในการแปลงข้อมูล: " + error.message;
+            }
+
+            // แสดงข้อมูล JSON ในหน้า HTML
+            document.getElementById("result").innerHTML = output;
+          } else {
+            // จัดการกับสถานะ HTTP ที่ไม่ใช่ 200
+            document.getElementById("result").innerHTML = "เกิดข้อผิดพลาดในการดึงข้อมูลจากเซิร์ฟเวอร์";
+          }
+        }
+      };
+
+      // เปิดวัตถุ XMLHttpRequest และระบุวิธีการ (GET) และ URL ที่ต้องการร้องขอ
+      xhttp.open("GET", `https://dict.paintbrushproject.com?${data}`, true);
+
+      // ส่งคำขอไปยังเซิร์ฟเวอร์
+      xhttp.send();
+    }
+  </script>
+</head>
+<body>
+
+  <h1>AJAX Dictionary Example</h1>
+  
+  <!-- ฟอร์มสำหรับกรอกข้อมูล -->
+  <form onsubmit="getTranslation(); return false;">
+    <label for="word">คำศัพท์ภาษาอังกฤษ:</label>
+    <input type="text" id="word" name="word" required>
+    <br>
+    <input type="submit" value="แปล">
+  </form>
+
+  <div id="result">ผลลัพธ์จะแสดงที่นี่</div>
+
+</body>
+</html>

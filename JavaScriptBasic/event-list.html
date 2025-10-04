@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Events Example</title>
+</head>
+<body>
+
+<h1>Welcome to My Website</h1>
+<input type="text" id="myInput" />
+<button id="myButton">Click Me</button>
+
+<script>
+    document.getElementById("myInput").addEventListener("change", function() {
+        alert("The input field has been changed.");
+    });
+
+    document.getElementById("myButton").addEventListener("click", function() {
+        alert("The button has been clicked.");
+    });
+</script>
+
+</body>
+</html>

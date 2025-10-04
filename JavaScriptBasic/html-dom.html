@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Find by HTML Object Collections</title>
+    <script src="Js/testjs.js"></script>
+    <script src="Js/myScript.js"></script>
+</head>
+<body>
+
+    <form id="form1">
+        <input type="text" name="username" value="User1">
+    </form>
+    
+    <form id="form2">
+        <input type="text" name="username" value="User2">
+    </form>
+
+    <img src="image1.png" alt="Image 1" width="200" height="180">
+    <img src="image2.png" alt="Image 2" width="200" height="180">
+    <br>
+    <a href="https://example.com">Example 1</a>
+    <a href="https://example.org">Example 2</a>
+    
+    <a name="section1">Section 1</a>
+    <a name="section2">Section 2</a>
+
+    <script>
+        // เข้าถึงฟอร์มทั้งหมดในหน้าเว็บ
+        let forms = document.forms;
+        
+        // แสดงจำนวนฟอร์ม
+        console.log("Number of forms: " + forms.length); // Output: Number of forms: 2
+        
+        // เข้าถึงฟอร์มแรกและแสดงค่า input
+        console.log(forms[0].elements["username"].value); // Output: User1
+    </script>
+    <script>
+        // เข้าถึงรูปภาพทั้งหมดในหน้าเว็บ
+        let images = document.images;
+        
+        // แสดงจำนวนรูปภาพ
+        console.log("Number of images: " + images.length); // Output: Number of images: 2
+        
+        // เข้าถึงและแสดงแอตทริบิวต์ src ของรูปภาพแรก
+        console.log(images[0].src); // Output: URL ของ image1.jpg
+    </script>
+    <script>
+        // เข้าถึงลิงก์ทั้งหมดในหน้าเว็บ
+        let links = document.links;
+        
+        // แสดงจำนวนลิงก์
+        console.log("Number of links: " + links.length); // Output: Number of links: 2
+        
+        // เข้าถึงและแสดงแอตทริบิวต์ href ของลิงก์แรก
+        console.log(links[0].href); // Output: URL ของ https://example.com
+    </script>
+    <script>
+        // เข้าถึงสคริปต์ทั้งหมดในหน้าเว็บ
+        let scripts = document.scripts;
+        
+        // แสดงจำนวนสคริปต์
+        console.log("Number of scripts: " + scripts.length); // Output: Number of scripts: 3
+        
+        // เข้าถึงและแสดงแอตทริบิวต์ src ของสคริปต์แรก
+        console.log(scripts[0].src); // Output: URL ของ script1.js
+    </script>
+    <script>
+        // เข้าถึงแองเคอร์ทั้งหมดในหน้าเว็บ
+        let anchors = document.anchors;
+        
+        // แสดงจำนวนแองเคอร์
+        console.log("Number of anchors: " + anchors.length); // Output: Number of anchors: 2
+        
+        // เข้าถึงและแสดงแอตทริบิวต์ name ของแองเคอร์แรก
+        console.log(anchors[0].name); // Output: section1
+    </script>
+
+</body>
+</html>

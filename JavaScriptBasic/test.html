@@ -1,0 +1,51 @@
+// ตัวอย่างฟอร์มการสร้างคูปอง
+function AddCouponForm() {
+    const [couponCode, setCouponCode] = useState("");
+    const [discount, setDiscount] = useState(0);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [conditions, setConditions] = useState("");
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // ฟังก์ชันเพื่อเพิ่มคูปองใหม่
+        addCoupon({ couponCode, discount, startDate, endDate, conditions });
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <label>
+                Coupon Code:
+                <input type="text" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} />
+            </label>
+            <label>
+                Discount (%):
+                <input type="number" value={discount} onChange={(e) => setDiscount(e.target.value)} />
+            </label>
+            <label>
+                Start Date:
+                <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+            </label>
+            <label>
+                End Date:
+                <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+            </label>
+            <label>
+                Conditions:
+                <textarea value={conditions} onChange={(e) => setConditions(e.target.value)} />
+            </label>
+            <button type="submit">Add Coupon</button>
+        </form>
+    );
+}
+
+// ตัวอย่างการใช้คูปองในขั้นตอนการสั่งซื้อ
+function ApplyCoupon({ couponCode }) {
+    const coupon = findCouponByCode(couponCode);
+    if (coupon && isCouponValid(coupon)) {
+        // ใช้ส่วนลดจากคูปอง
+        applyDiscount(coupon.discount);
+    } else {
+        alert("Coupon is invalid or expired");
+    }
+}
